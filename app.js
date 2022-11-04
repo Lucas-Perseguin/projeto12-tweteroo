@@ -38,6 +38,11 @@ app.get('/tweets', (req, res) => {
     res.status(400).send('Informe uma página válida!');
   }
   const pageTweets = tweets.slice((page - 1) * 10, page * 10);
+  pageTweets.forEach((tweet) => {
+    tweet.avatar = users.find(
+      (user) => user.username === tweet.username
+    ).avatar;
+  });
   res.json(pageTweets);
 });
 
